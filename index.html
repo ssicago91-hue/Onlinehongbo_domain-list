@@ -185,5 +185,27 @@ document.getElementById('statusSel').addEventListener('change', e => { statusFil
 document.getElementById('sortSel').addEventListener('change', e => { sortMode = e.target.value; render(); });
 render();
 </script>
+
+<button type="button" id="dlTopBtn" class="dl-top-btn" aria-label="맨 위로">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+<style>
+.dl-top-btn{position:fixed;right:24px;bottom:28px;z-index:100;width:46px;height:46px;border:none;border-radius:50%;background:var(--primary);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(26,127,110,.35);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,visibility .25s,transform .25s,background .2s}
+.dl-top-btn svg{width:20px;height:20px}
+.dl-top-btn:hover{background:var(--primary-dark)}
+.dl-top-btn.dl-top-show{opacity:1;visibility:visible;transform:translateY(0)}
+@media (max-width:640px){.dl-top-btn{right:16px;bottom:20px;width:42px;height:42px}}
+</style>
+<script>
+(function(){
+  var btn = document.getElementById('dlTopBtn');
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('dl-top-show', window.scrollY > 300);
+  }, {passive:true});
+  btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
 </body>
 </html>
